@@ -11,10 +11,15 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class RegistrationFormWithPageObjectTests {
+
+    RegistrationPage registrationPage = new RegistrationPage();
     String firstname = "Alex";
     String lastname = "DemiuS";
     String email = "alex@alex.com";
     String phonenumber = "1111111111";
+    String day = "30"; String month = "March"; String year = "1999";
+    String subject = "Math";
+    String adress  = "Some adress 1";
 
 
     @BeforeAll
@@ -24,29 +29,24 @@ public class RegistrationFormWithPageObjectTests {
     }
     @Test
     void successFillWithPOTest() {
-        open("/automation-practice-form");
-        $(".main-header").shouldHave(text("Practice Form"));
-        new RegistrationPage().setFirstName(firstname);
-        new RegistrationPage().setLastName(lastname);
-        new RegistrationPage().setEmail(email);
-        $("#genterWrapper").$(byText("Male")).click();
-        new RegistrationPage().setPhoneNumber(phonenumber);
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption("March");
-        $(".react-datepicker__year-select").selectOption("1999");
-        $("[aria-label$='Tuesday, March 2nd, 1999']").click();
-        $("#subjectsInput").setValue("Math").pressEnter();
-        $("#hobbiesWrapper").$(byText("Sports")).click();
-        $("#uploadPicture").uploadFromClasspath("kotik.jpg");
-        $("#currentAddress").setValue("Some address 1");
-        $("#state").scrollTo().click();
-        $("#stateCity-wrapper").$(byText("NCR")).click();
-        $("#city").click();
-        $("#stateCity-wrapper").$(byText("Delhi")).click();
-        $("#submit").click();
-        new RegistrationPage().checkResults("Student Name","Alex DemiuS");
-        new RegistrationPage().checkResults("Student Email","alex@alex.com");
-        new RegistrationPage().checkResults("Gender","Male");
+
+        registrationPage
+                .openPage()
+                .setFirstName(firstname)
+                .setLastName(lastname)
+                .setEmail(email)
+                .setGender()
+                .setPhoneNumber(phonenumber)
+                .setBirthDate(day, month, year)
+                .setSubjects(subject)
+                .setHobbies()
+                .uploadPicture()
+                .setAdress(adress)
+                .chooseState()
+                .chooseCity()
+                .checkResults("Student Name",firstname + " " + lastname)
+                .checkResults("Student Email", email)
+                .checkResults("Gender","Male");
 
     }
 }
