@@ -20,6 +20,7 @@ public class RegistrationFormWithPageObjectTests {
     String day = "30"; String month = "March"; String year = "1999";
     String subject = "Math";
     String adress  = "Some adress 1";
+    String gender  = "Male";
 
 
     @BeforeAll
@@ -46,7 +47,7 @@ public class RegistrationFormWithPageObjectTests {
                 .chooseCity()
                 .checkResults("Student Name",firstname + " " + lastname)
                 .checkResults("Student Email", email)
-                .checkResults("Gender","Male");
+                .checkResults("Gender",gender);
 
     }
 }
