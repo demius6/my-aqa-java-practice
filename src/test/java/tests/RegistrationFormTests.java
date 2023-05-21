@@ -1,4 +1,4 @@
-package junit;
+package tests;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class TextBoxTests {
+public class RegistrationFormTests {
 
     @BeforeAll
     static void beforeAAll() {
@@ -21,7 +21,7 @@ public class TextBoxTests {
         open("/automation-practice-form");
         $(".main-header").shouldHave(text("Practice Form"));
         $("#firstName").setValue("Alex");
-        $("#lastName").setValue("Yakimovich");
+        $("#lastName").setValue("DemiuS");
         $("#userEmail").setValue("alex@alex.com");
         $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue("1231231230");
@@ -42,7 +42,7 @@ public class TextBoxTests {
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").$(byText("Student Name"))
-                .parent().shouldHave(text("Alex Yakimovich"));
+                .parent().shouldHave(text("Alex DemiuS"));
 
     }
 }
